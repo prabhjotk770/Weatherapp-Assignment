@@ -11,15 +11,23 @@ import ContentLoader from 'react-content-loader';
 
 const Forecast = () => {
 	const [responseObj, setResponseObj] = useState({});
-	const [city, setCity] = useState('delhi');
+	const [city, setCity] = useState('New Delhi');
 	const [chartData, setChartData] = useState({});
 	const [loading, setLoading] = useState(false);
 
 	//FETCHING API
 
 	useEffect(() => {
-		fetchApi();
-	}, []);
+		fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=83e95765618bc73e8530510647bf5373`, {
+			method: 'GET',
+			key: '',
+		})
+			.then((response) => response.json())
+			.then((response) => {
+				setResponseObj(response);
+			})
+			.catch((err) => alert('City not found!, Please enter correct name'));
+	}, [loading, city]);
 
 	const fetchApi = (async) => {
 		let hour = [];
