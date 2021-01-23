@@ -14,35 +14,48 @@ function Chart({ data, temp, icon, humidity, pressure, sunrise, sunset }) {
 					<img className="chart__head" src={icon} alt="icon" />
 				</div>
 				<div>
-					<Line
-						className="char__line"
-						data={data}
-						options={{
-							responsive: true,
+					<div className="chart__wrapper">
+						<Line
+							className="char__line"
+							data={data}
+							options={{
+								responsive: true,
+								drag: true,
+								legend: {
+									display: false,
+								},
+								tooltips: {
+									callbacks: {
+										label: function (tooltipItem) {
+											return tooltipItem.yLabel;
+										},
+									},
+								},
 
-							scales: {
-								yAxes: [
-									{
-										ticks: {
-											autoSkip: true,
-											maxTicksLimit: 10,
-											beginAtZero: true,
+								scales: {
+									yAxes: [
+										{
+											ticks: {
+												autoSkip: true,
+												maxTicksLimit: 10,
+												beginAtZero: true,
+											},
+											gridLines: {
+												display: false,
+											},
 										},
-										gridLines: {
-											display: false,
+									],
+									xAxes: [
+										{
+											gridLines: {
+												display: true,
+											},
 										},
-									},
-								],
-								xAxes: [
-									{
-										gridLines: {
-											display: true,
-										},
-									},
-								],
-							},
-						}}
-					/>
+									],
+								},
+							}}
+						/>
+					</div>
 				</div>
 
 				<div className="chart__humidity">

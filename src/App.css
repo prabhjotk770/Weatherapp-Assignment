@@ -1,7 +1,5 @@
 .App {
 	text-align: center;
-
-	transition: 0.4 ease;
 }
 
 /* FORECAST */
@@ -20,7 +18,6 @@
 }
 
 .forecast_input {
-	border: 'none';
 	padding: 3px;
 	display: block;
 	margin: 0 auto;
@@ -28,6 +25,17 @@
 }
 
 /* TOPFORECAST */
+
+.topCard {
+	object-fit: contain;
+	display: flex;
+	align-items: center;
+	overflow-y: hidden;
+	overflow-x: scroll;
+}
+.topCard::-webkit-scrollbar {
+	display: none;
+}
 
 .topforecast {
 	align-items: center;
@@ -47,6 +55,7 @@
 
 .topforecast__div {
 	padding: 20px;
+	align-items: center;
 }
 
 /* CHART */
@@ -55,18 +64,20 @@
 	display: flex;
 	justify-content: center;
 
-	overflow-x: scroll;
 	padding: 20px;
 }
 
+.chart__wrapper {
+	display: 'relative';
+}
+
 .chat__line {
+	position: absolute;
 	overflow-y: hidden;
 	overflow-x: scroll;
+	width: 300px;
 }
 .chart__line::-webkit-scrollbar {
-	display: none;
-}
-.chart::-webkit-scrollbar {
 	display: none;
 }
 

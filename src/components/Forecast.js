@@ -1,42 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import TopForecast from './TopForecast';
+
 import '../App.css';
 import { Card } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Chart from './Chart';
-import Moment from 'react-moment';
-// import TextField from '@material-ui/core/TextField';
-// import Autocomplete from '@material-ui/lab/Autocomplete';
 
+import Cardtopforecast from './Cardtopforecast';
 import ContentLoader from 'react-content-loader';
 
 const Forecast = () => {
-	let [responseObj, setResponseObj] = useState({});
-	let [city, setCity] = useState('delhi');
+	const [responseObj, setResponseObj] = useState({});
+	const [city, setCity] = useState('delhi');
 	const [chartData, setChartData] = useState({});
-	const [temp, setTemp] = useState([]);
-	const [hours, setHours] = useState([]);
 	const [loading, setLoading] = useState(false);
-	// const [citySearch, setCitySearch] = useState([
-	// 	{ name: 'delhi', temp: '15' },
-	// 	{ name: 'mumbai', temp: '25' },
-	// 	{ name: 'dehradun', temp: '10' },
-	// 	{ name: 'hyderabad', temp: '25' },
-	// 	{ name: 'chennai', temp: '35' },
-	// ]);
 
 	//FETCHING API
 
 	useEffect(() => {
 		fetchApi();
-	});
+	}, []);
 
-	const fetchApi = () => {
+	const fetchApi = (async) => {
 		let hour = [];
 		let temperature = [];
-		fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=4590479b57a147c925d75522bad68d1d`, {
+		fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=83e95765618bc73e8530510647bf5373`, {
 			method: 'GET',
+			key: '',
 		})
 			.then((response) => response.json())
 			.then((response) => {
@@ -47,12 +37,12 @@ const Forecast = () => {
 				}
 				hour.length -= 30;
 				temperature.length -= 30;
+
 				setChartData({
 					labels: hour,
 					temperature,
 					datasets: [
 						{
-							label: 'temp',
 							data: temperature,
 							backgroundColor: ['white'],
 
@@ -61,20 +51,18 @@ const Forecast = () => {
 						},
 					],
 				});
-			});
+			})
+			.catch((err) => alert('City not found!, Please enter correct name'));
 		setLoading(true);
-		setTemp(temperature);
-		setHours(hour);
 	};
 
-	console.log('##', temp);
-	console.log('$$', hours);
+	//onsubmit form
 
 	const getForecast = (e) => {
 		e.preventDefault();
 		fetchApi();
 	};
-	console.log('33', responseObj);
+	console.log('$$', responseObj);
 
 	//Kelvin to celsius conversion
 
@@ -98,21 +86,7 @@ const Forecast = () => {
 							onChange={(e) => setCity(e.target.value)}
 							className="forecast_input"
 						/>
-						{/* <Autocomplete
-							id="combo-box-demo"
-							options={citySearch}
-							getOptionLabel={(option) => option.name}
-							style={{ width: 300 }}
-							renderInput={(params) => (
-								<TextField
-									{...params}
-									label="Enter City"
-									variant="outlined"
-									onChange={(e) => setCity(e.target.value)}
-								/>
-							)}
-							onSelect={getForecast}
-						/> */}
+
 						<SearchIcon />
 					</form>
 				</Card>
@@ -121,56 +95,10 @@ const Forecast = () => {
 			{loading ? (
 				Object.keys(responseObj).length !== 0 && (
 					<div>
-						<div className="chart">
-							<TopForecast
-								highlight="topforecast_highlight"
-								responseObj={responseObj}
-								day={<Moment format="ddd">{responseObj.list[0].dt_txt}</Moment>}
-								temp_min={getCelsius(responseObj.list[0].main.temp_min)}
-								temp_max={getCelsius(responseObj.list[0].main.temp_max)}
-								desc={responseObj.list[0].weather[0].description}
-								icon={`http://openweathermap.org/img/w/${responseObj.list[0].weather[0].icon}.png`}
-							/>
-							<TopForecast
-								responseObj={responseObj}
-								day={<Moment format="ddd">{responseObj.list[8].dt_txt}</Moment>}
-								temp_min={getCelsius(responseObj.list[8].main.temp_min)}
-								temp_max={getCelsius(responseObj.list[8].main.temp_max)}
-								desc={responseObj.list[8].weather[0].description}
-								icon={`http://openweathermap.org/img/w/${responseObj.list[8].weather[0].icon}.png`}
-							/>
-							<TopForecast
-								responseObj={responseObj}
-								day={<Moment format="ddd">{responseObj.list[16].dt_txt}</Moment>}
-								temp_min={getCelsius(responseObj.list[16].main.temp_min)}
-								temp_max={getCelsius(responseObj.list[16].main.temp_max)}
-								desc={responseObj.list[16].weather[0].description}
-								icon={`http://openweathermap.org/img/w/${responseObj.list[16].weather[0].icon}.png`}
-							/>
-							<TopForecast
-								responseObj={responseObj}
-								day={<Moment format="ddd">{responseObj.list[24].dt_txt}</Moment>}
-								temp_min={getCelsius(responseObj.list[24].main.temp_min)}
-								temp_max={getCelsius(responseObj.list[24].main.temp_max)}
-								desc={responseObj.list[24].weather[0].description}
-								icon={`http://openweathermap.org/img/w/${responseObj.list[24].weather[0].icon}.png`}
-							/>
-							<TopForecast
-								responseObj={responseObj}
-								day={<Moment format="ddd">{responseObj.list[32].dt_txt}</Moment>}
-								temp_min={getCelsius(responseObj.list[32].main.temp_min)}
-								temp_max={getCelsius(responseObj.list[32].main.temp_max)}
-								desc={responseObj.list[32].weather[0].description}
-								icon={`http://openweathermap.org/img/w/${responseObj.list[32].weather[0].icon}.png`}
-							/>
-							<TopForecast
-								responseObj={responseObj}
-								day={<Moment format="ddd">{responseObj.list[39].dt_txt}</Moment>}
-								temp_min={getCelsius(responseObj.list[39].main.temp_min)}
-								temp_max={getCelsius(responseObj.list[39].main.temp_max)}
-								desc={responseObj.list[39].weather[0].description}
-								icon={`http://openweathermap.org/img/w/${responseObj.list[39].weather[0].icon}.png`}
-							/>
+						<div style={{ display: 'flex', justifyContent: 'center' }}>
+							<div className="topCard">
+								<Cardtopforecast responseObj={responseObj} />
+							</div>
 						</div>
 
 						<div className="chart">
