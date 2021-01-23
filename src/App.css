@@ -1,38 +1,102 @@
 .App {
-  text-align: center;
+	text-align: center;
+
+	transition: 0.4 ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* FORECAST */
+
+.forecast {
+	display: inline-block;
+	height: 20;
+	margin: '30';
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.forecast__form {
+	display: flex;
+	flex-direction: row;
+
+	justify-content: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.forecast_input {
+	border: 'none';
+	padding: 3px;
+	display: block;
+	margin: 0 auto;
+	font-size: large;
 }
 
-.App-link {
-  color: #61dafb;
+/* TOPFORECAST */
+
+.topforecast {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	width: max-content;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.topforecast_highlight {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	width: max-content;
+	border: 2px solid;
+	border-color: rgb(2, 90, 90);
+}
+
+.topforecast__div {
+	padding: 20px;
+}
+
+/* CHART */
+
+.chart {
+	display: flex;
+	justify-content: center;
+
+	overflow-x: scroll;
+	padding: 20px;
+}
+
+.chat__line {
+	overflow-y: hidden;
+	overflow-x: scroll;
+}
+.chart__line::-webkit-scrollbar {
+	display: none;
+}
+.chart::-webkit-scrollbar {
+	display: none;
+}
+
+.chart__top {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin: 20px;
+}
+
+.chart__humidity {
+	display: flex;
+	justify-content: center;
+	padding: 10px;
+}
+
+.chart__sunrise {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px;
+}
+
+.chart__head {
+	padding: 10px;
+}
+
+.chart__humid__head {
+	background-color: rgb(236, 247, 247);
+	margin-left: 10px;
+	padding: 10px;
+	font-weight: 600;
+	width: auto;
 }
