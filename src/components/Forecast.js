@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import '../App.css';
 import { Card } from '@material-ui/core';
@@ -17,17 +17,17 @@ const Forecast = () => {
 
 	//FETCHING API
 
-	useEffect(() => {
-		fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=83e95765618bc73e8530510647bf5373`, {
-			method: 'GET',
-			key: '',
-		})
-			.then((response) => response.json())
-			.then((response) => {
-				setResponseObj(response);
-			})
-			.catch((err) => alert('City not found!, Please enter correct name'));
-	}, [loading, city]);
+	// useEffect(() => {
+	// 	fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=83e95765618bc73e8530510647bf5373`, {
+	// 		method: 'GET',
+	// 		key: '',
+	// 	})
+	// 		.then((response) => response.json())
+	// 		.then((response) => {
+	// 			setResponseObj(response);
+	// 		})
+	// 		.catch((err) => alert('City not found!, Please enter correct name'));
+	// }, [loading]);
 
 	const fetchApi = (async) => {
 		let hour = [];
