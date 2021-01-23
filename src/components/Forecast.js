@@ -18,19 +18,19 @@ const Forecast = () => {
 	const [temp, setTemp] = useState([]);
 	const [hours, setHours] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const [citySearch, setCitySearch] = useState([
-		{ name: 'delhi', temp: '15' },
-		{ name: 'mumbai', temp: '25' },
-		{ name: 'dehradun', temp: '10' },
-		{ name: 'hyderabad', temp: '25' },
-		{ name: 'chennai', temp: '35' },
-	]);
+	// const [citySearch, setCitySearch] = useState([
+	// 	{ name: 'delhi', temp: '15' },
+	// 	{ name: 'mumbai', temp: '25' },
+	// 	{ name: 'dehradun', temp: '10' },
+	// 	{ name: 'hyderabad', temp: '25' },
+	// 	{ name: 'chennai', temp: '35' },
+	// ]);
 
 	//FETCHING API
 
 	useEffect(() => {
 		fetchApi();
-	}, []);
+	});
 
 	const fetchApi = () => {
 		let hour = [];
@@ -119,7 +119,7 @@ const Forecast = () => {
 			</div>
 
 			{loading ? (
-				Object.keys(responseObj).length != 0 && (
+				Object.keys(responseObj).length !== 0 && (
 					<div>
 						<div className="chart">
 							<TopForecast

@@ -12,7 +12,7 @@ const TopForecast = ({ day, temp_min, temp_max, desc, icon, highlight }) => {
 					{temp_min}º
 				</div>
 
-				<img src={icon} />
+				<img src={icon} alt="icon" />
 				<div>{desc}</div>
 			</Paper>
 		</div>

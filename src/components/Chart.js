@@ -11,7 +11,7 @@ function Chart({ data, temp, icon, humidity, pressure, sunrise, sunset }) {
 			<Paper elevation={3}>
 				<div className="chart__top">
 					<h2 className="chart__head">{temp} ºC</h2>
-					<img className="chart__head" src={icon} />
+					<img className="chart__head" src={icon} alt="icon" />
 				</div>
 				<div>
 					<Line
