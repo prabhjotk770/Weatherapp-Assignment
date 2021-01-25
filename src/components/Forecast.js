@@ -210,6 +210,7 @@ const Forecast = () => {
 							autoFocus
 							resultStringKeyName="title"
 							styling={{ zIndex: 2, color: 'black' }}
+							placeholder={city}
 						/>
 					</div>
 					<div style={{ padding: '10px' }} className="sendicon">
