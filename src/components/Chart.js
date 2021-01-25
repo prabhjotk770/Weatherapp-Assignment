@@ -1,11 +1,12 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+
 import Paper from '@material-ui/core/Paper';
 import Moment from 'react-moment';
 import '../App.css';
 import sun from '../assets/sunrise.png';
+import Chart from 'react-apexcharts';
 
-function Chart({ data, temp, icon, humidity, pressure, sunrise, sunset }) {
+function MyChart({ data, temp, icon, humidity, pressure, sunrise, sunset, options, series }) {
 	return (
 		<div>
 			<Paper elevation={3}>
@@ -15,46 +16,7 @@ function Chart({ data, temp, icon, humidity, pressure, sunrise, sunset }) {
 				</div>
 				<div>
 					<div className="chart__wrapper">
-						<Line
-							className="char__line"
-							data={data}
-							options={{
-								responsive: true,
-								drag: true,
-								legend: {
-									display: false,
-								},
-								tooltips: {
-									callbacks: {
-										label: function (tooltipItem) {
-											return tooltipItem.yLabel;
-										},
-									},
-								},
-
-								scales: {
-									yAxes: [
-										{
-											ticks: {
-												autoSkip: true,
-												maxTicksLimit: 10,
-												beginAtZero: true,
-											},
-											gridLines: {
-												display: false,
-											},
-										},
-									],
-									xAxes: [
-										{
-											gridLines: {
-												display: true,
-											},
-										},
-									],
-								},
-							}}
-						/>
+						<Chart className="char__line" options={options} series={series} type="line" />
 					</div>
 				</div>
 
@@ -89,4 +51,4 @@ function Chart({ data, temp, icon, humidity, pressure, sunrise, sunset }) {
 		</div>
 	);
 }
-export default Chart;
+export default MyChart;
